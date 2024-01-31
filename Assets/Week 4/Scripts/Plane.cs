@@ -6,7 +6,7 @@ using UnityEngine;
 public class Plane : MonoBehaviour
 {
     public List<Vector2> points;
-    public float speed = 1;
+    public float speed;
     public float newPointThreshold = 0.2f;
     Vector2 lastPosition;
     LineRenderer lineRenderer;
@@ -21,6 +21,7 @@ public class Plane : MonoBehaviour
         lineRenderer.positionCount = 1;
         lineRenderer.SetPosition(0, transform.position);
         rb = GetComponent<Rigidbody2D>();
+        speed = Random.Range(1, 3);
     }
 
     void OnMouseDown()
