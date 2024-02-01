@@ -5,7 +5,8 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     float timerRange = Random.Range(1, 5);
-    public GameObject prefab1, prefab2, prefab3, prefab4;
+    public List<Sprite> sprites = new List<Sprite>();
+    SpriteRenderer spr;
 
     // Start is called before the first frame update
     void Start()
@@ -26,18 +27,9 @@ public class Spawner : MonoBehaviour
     {
         Vector3 spawnPoint = new Vector3(Random.Range(-5, 5), Random.Range(-5, 5), 0);
         Quaternion rotation = Quaternion.Euler(0, 0, 359);
-        int whichPlane = Random.Range(1, 4);
-        switch (whichPlane)
-        {
-            case 1: Instantiate(prefab1, spawnPoint, rotation);
-                break;
-            case 2: Instantiate(prefab2, spawnPoint, rotation);
-                break;
-            case 3: Instantiate(prefab3, spawnPoint, rotation);
-                break;
-            case 4: Instantiate(prefab4, spawnPoint, rotation);
-                break;
-        }
+        float whichPlane = Random.Range(0, 3);
+        spr = GetComponent<SpriteRenderer>();
+        spr.sprite = sprites[(int)whichPlane];
         timerRange = Random.Range(1, 5);
     }
 }
