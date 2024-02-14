@@ -13,6 +13,7 @@ public class ReplacementKnight : MonoBehaviour
     public float maxHealth = 10;
     public float health;
     bool isDead;
+    public HealthBar healthBar;
 
     Rigidbody2D rb;
     Animator animator;
@@ -21,7 +22,9 @@ public class ReplacementKnight : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        health = maxHealth;
+        healthBar = GetComponent<HealthBar>();
+        SendMessage("SetHealth", PlayerPrefs.GetFloat("CurrentHP", maxHealth));
+        health = PlayerPrefs.GetFloat("CurrentHP", maxHealth);
         isDead = false;
     }
 
@@ -68,6 +71,7 @@ public class ReplacementKnight : MonoBehaviour
     {
         health -= damage;
         health = Mathf.Clamp(health, 0, maxHealth);
+        PlayerPrefs.SetFloat("CurrentHP", health);
         if (health == 0)
         {
             isDead = true;
